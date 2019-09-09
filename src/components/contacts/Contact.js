@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Consumer } from "../../context";
+import axios from "axios";
+import { Link } from "react-router-dom";
+
 // import "./contact.css";
 //class based component are created with rcc tab
 
@@ -18,7 +21,10 @@ class Contact extends Component {
   };
 
   onDeleteClick = (id, dispatch) => {
-    dispatch({ type: "DELETE_CONTACT", payload: id });
+    //using api instead of a db/backend
+    axios
+      .delete(`https://jsonplaceholder.typicode.com/users/${id}`)
+      .then(res => dispatch({ type: "DELETE_CONTACT", payload: id }));
   };
 
   render() {
@@ -45,6 +51,17 @@ class Contact extends Component {
                   style={{ cursor: "pointer", float: "right", color: "red" }}
                   onClick={this.onDeleteClick.bind(this, id, dispatch)}
                 />
+                <Link to={`contact/edit/${id}`}>
+                  <i
+                    className="fas fa-pencil-alt"
+                    style={{
+                      cursor: "pointer",
+                      float: "right",
+                      color: "black",
+                      marginRight: "1rem"
+                    }}
+                  />
+                </Link>
               </h4>
               {showContactInfo ? (
                 <ul className="list-group" style={{ color: "blue" }}>
