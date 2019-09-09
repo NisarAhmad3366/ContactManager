@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { HashRouter as Router, Route, Switch } from "react-router-dom";
-// import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+// import { HashRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import Contacts from "./components/contacts/Contacts";
 import Header from "./components/layouts/Header";
@@ -18,7 +18,7 @@ class App extends Component {
       //return can only return one div - dont use more than two div
       // taking input is called props short for properties
       <Provider>
-        <Router>
+        <Router basename={process.env.PUBLIC_URL}>
           <div className="App">
             <Header branding="Contact Manager" />
             <div className="container">
